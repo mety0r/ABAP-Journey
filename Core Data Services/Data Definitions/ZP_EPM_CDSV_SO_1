@@ -1,0 +1,33 @@
+@AbapCatalog.sqlViewName: 'ZPEPMCDSVS01'
+@AbapCatalog.compiler.compareFilter: true
+@AbapCatalog.preserveKey: true
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@Analytics.dataCategory: #FACT
+@Analytics.dataExtraction.enabled: true
+@EndUserText.label: 'Anubhav BW scenario'
+define view ZP_EPM_CDSV_SO_1
+  as select from SEPM_I_SlsOrdItemScheduleLine
+{
+  key SalesOrderItemScheduleLineUUID,
+      SalesOrderItemUUID,
+      SalesOrderUUID,
+      @Semantics.quantity.unitOfMeasure: 'QuantityUnit'
+      Quantity,
+      QuantityUnit,
+      DeliveryDateTime,
+      _SalesOrder. SalesOrder,
+      _SalesOrderItem.SalesOrderItem,
+      _SalesOrder._Customer.BusinessPartner           as BP_ID,
+      _SalesOrderItem._Product. Product              as Product_ID,
+      _SalesOrderItem.GrossAmountInTransacCurrency   as Gross_Amount,
+      _SalesOrderItem.NetAmountInTransactionCurrency as Net_Amount,
+      _SalesOrderItem.TaxAmountInTransactionCurrency as Tax_Amount,
+      _SalesOrderItem.TransactionCurrency            as Currency,
+      _SalesOrder.SalesOrderDeliveryStatus           as DeliveryStatus,
+      _SalesOrder.SalesOrderBillingStatus            as BillingStatus,
+      _SalesOrder.SalesOrderLifeCycleStatus          as LifecycleStatus,
+      _SalesOrder.CreationDateTime,
+      _SalesOrder.LastChangedDateTime,
+      _SalesOrder._CreatedByUser.Employee              as Created_By,
+      _SalesOrder._LastChangedByUser.Employee         as LastChanged_By
+}
