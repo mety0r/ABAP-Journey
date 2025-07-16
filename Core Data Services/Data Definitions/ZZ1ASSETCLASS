@@ -1,0 +1,14 @@
+@AbapCatalog.sqlViewName: 'ZZ1ASSETCLASS'
+@AbapCatalog.compiler.compareFilter: true
+@AbapCatalog.preserveKey: true
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'Asset Class details'
+@Metadata.ignorePropagatedAnnotations: true
+@OData.publish: true
+define view ZZ1_AssetClass as select from I_AssetClassText
+{
+    key AssetClass,
+    key Language,
+    AssetClassName,
+    AssetClassDescription
+}
